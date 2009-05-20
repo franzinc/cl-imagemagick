@@ -8,7 +8,7 @@ SWIG_FLAGS := -DACL_WINDOWS
 SWIG_INCLUDES := -I"C:/mikel/src/ImageMagick-6.5.2-Q16/include"
 else
 SWIG_FLAGS := -DACL_LINUX
-SWIG_INCLUDES := -I/usr/include/magick
+SWIG_INCLUDES := -I/usr/include
 endif
 
 all: MagickWand.cl MagickCore.cl
