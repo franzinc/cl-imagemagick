@@ -15,7 +15,7 @@
   (start :port port))
 
 ;; where actual image files are.
-(defparameter *flag-dir* "./US_State_Flags/")
+(defparameter *thumb-dir* "./US_State_Flags/")
 
 ;; base URL to retrieve thumbnails.
 (defparameter *thumb-path* "/thumbs/")
@@ -25,10 +25,10 @@
 (defparameter *thumb-dims* "100x100")
 (defparameter *thumb-urls-generated* nil)
 
-;; publish entities for all the files in *flag-dir*
+;; publish entities for all the files in *thumb-dir*
 (defun publish-thumbnails ()
   (ensure-directories-exist *thumb-tmp*)
-  (dolist (i (directory *flag-dir*))
+  (dolist (i (directory *thumb-dir*))
     (let ((name (file-namestring i))
 	  (in-file (enough-namestring i))
 	  (out-file (sys:make-temp-file-name "thumb" *thumb-tmp*))
@@ -48,7 +48,7 @@
 
 (publish-directory 
  :prefix "/images/"
- :destination *flag-dir*)
+ :destination *thumb-dir*)
 
 (publish
  :path "/"
@@ -61,22 +61,34 @@
 		      (:body (:h1 ((:a href "/images/")
 				   "Click here to view Thumbs")))))))))
 
+(defun generate-index (req ent)
+  (unless *thumb-urls-generated*
+    (publish-thumbnails))
+  (with-http-response (req ent)
+    (with-http-body (req ent)
+      (html (:html
+	     (:head (:title "Dynamic Thumbnail Demo - Image Index")
+		    ((:style type "text/css") "img { padding: 10px; }"))
+	     (:body (dolist (i (directory *thumb-dir*))
+		      (let ((name (file-namestring i)))
+			(html ((:a href (format nil "/images/~a" name))
+			       ((:img src (format nil "/thumbs/~a" name))))
+			      )))))))))
+
 (publish
  :path "/images/"
  :content-type "text/html"
  :function
- #'(lambda (req ent)
-     (unless *thumb-urls-generated*
-       (publish-thumbnails))
-     (with-http-response (req ent)
-       (with-http-body (req ent)
-	 (html (:html
-		(:head (:title "Dynamic Thumbnail Demo - Image Index")
-		       ((:style type "text/css") "img { padding: 10px; }"))
-		(:body (dolist (i (directory *flag-dir*))
-			 (let ((name (file-namestring i)))
-			   (html ((:a href (format nil "/images/~a" name))
-				  ((:img src (format nil "/thumbs/~a" name))))
-				 ))))))))))
+ #'generate-index)
 
+(publish
+ :path "/images/index.htm"
+ :content-type "text/html"
+ :function
+ #'generate-index)
 
+(publish
+ :path "/images/index.html"
+ :content-type "text/html"
+ :function
+ #'generate-index)

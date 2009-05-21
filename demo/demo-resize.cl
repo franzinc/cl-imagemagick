@@ -25,25 +25,9 @@
        else (error "No images found in input file ~s." in-file))
     images-modified))
 
-;; does this maintain aspect ratio?
-(defun scale-image (in-file new-dims out-file)
-  (let ((wand (NewMagickWand))
-	images-modified)
-    (when (= (MagickReadImage wand in-file)
-	     MagickFalse)
-      (error "unable to read image file ~s." in-file))
-    (MagickResetIterator wand)
-    (while (/= (MagickNextImage wand) MagickFalse)
-      (MagickScaleImage wand (car new-dims) (cdr new-dims))
-      (setf images-modified t))
-    (if* images-modified
-       then (when (= (MagickWriteImages wand out-file MagickTrue)
-		     MagickFalse)
-	      (error "unable to write to file ~s." out-file))
-       else (error "No images found in input file ~s." in-file))
-    images-modified))
-
-;; aha!! this maintains aspect ratio.
+;; resize an image to new-dims while maintaining aspect-ratio.
+;; new-dims is a string of the form "NNNxNNN" where N are digits.
+;; the other args are the same as above.
 (defun xform-image (in-file new-dims out-file)
   (let ((wand (NewMagickWand))
 	images-modified)
