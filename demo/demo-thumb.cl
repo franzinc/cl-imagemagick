@@ -71,10 +71,12 @@
      (with-http-response (req ent)
        (with-http-body (req ent)
 	 (html (:html
-		(:head (:title "Dynamic Thumbnail Demo - Image Index"))
+		(:head (:title "Dynamic Thumbnail Demo - Image Index")
+		       ((:style type "text/css") "img { padding: 10px; }"))
 		(:body (dolist (i (directory *flag-dir*))
 			 (let ((name (file-namestring i)))
 			   (html ((:a href (format nil "/images/~a" name))
-				  ((:img src (format nil "/thumbs/~a" name))))))))))))))
-			  
+				  ((:img src (format nil "/thumbs/~a" name))))
+				 ))))))))))
+
 
