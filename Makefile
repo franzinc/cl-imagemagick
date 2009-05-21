@@ -5,7 +5,7 @@ on_macosx  := $(shell if test `uname -s` = "Darwin"; then echo yes; else echo no
 
 ifeq ($(on_windows),yes)
 SWIG_FLAGS := -DACL_WINDOWS
-SWIG_INCLUDES := -I"C:/mikel/src/ImageMagick-6.5.2-Q16/include"
+SWIG_INCLUDES := -I"C:/Program Files/ImageMagick-6.5.2-Q16/include"
 else
 SWIG_FLAGS := -DACL_LINUX
 SWIG_INCLUDES := -I/usr/include
