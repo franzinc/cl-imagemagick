@@ -1,0 +1,5 @@
+cl-imagemagick is a Common Lisp wrapper for the ImageMagick libraries,
+MagickWand.
+
+It is known to work with Allegro Common Lisp 8.1 and ImageMagick
+6.5.2-Q16 on Windows.
