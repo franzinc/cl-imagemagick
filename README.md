@@ -1,5 +1,5 @@
-cl-imagemagic: test markup for README.
-======================================
+cl-imagemagic: A Common Lisp layer for ImageMagick
+==================================================
 
 Table of contents
 -----------------
