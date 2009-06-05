@@ -1,5 +1,5 @@
-cl-imagemagick: A Common Lisp layer for ImageMagick
-===================================================
+cl-imagemagic: test markup for README.
+======================================
 
 Table of contents
 -----------------
@@ -59,14 +59,12 @@ wish to try this demo on another platform, please see the
 notes section of this README file.
 
  * Download the cl-imagemagick repository from github.
-
  * cd into the directory in which you've downloaded cl-imagemagick.
-
  * start Allegro CL
-
- * :cd demo
-
- * :cl demo-thumb.cl
+ * Enter the demo directory
+    :cd demo
+ * Load the demo code.
+    :cl demo-thumb.cl
 
 This will compile and load the demo. To run it you'll be starting a
 server on the local machine via the function start-server.  This
@@ -74,7 +72,7 @@ function takes an optional argument indicating the port on which the
 server listens. It defaults to 8080. If that is acceptable, you can
 start the server by evaluating:
 
- * (start-server)
+    (start-server)
 
 The server should now be up and running.
 
@@ -84,14 +82,13 @@ Configuration
 If you'd like to specify a different port, for example port 9000,
 evaluate: 
 
- * (start-server 9000)
+    (start-server 9000)
 
 Documentation
 -------------
 
-For more documentation please see:
-
- * [tech corner](http://franz.com/support/tech_corner/imagemagick052109.lhtml)
+For more documentation please see the cl-imagemagick
+[tech corner](http://franz.com/support/tech_corner/imagemagick052109.lhtml).
 
 License
 -------
@@ -113,10 +110,9 @@ platforms, you can use this interface and the accompanying Makefile as
 a reference. 
 
 The swig command-line used to generate this interface:
-`
-   swig -allegrocl -nocwrap -DACL_LINUX \
-        -I/usr/include -isolate MagickWand.i
-`
+
+    swig -allegrocl -nocwrap -DACL_LINUX -I/usr/include -isolate MagickWand.i
+
 -nocwrap tells SWIG that we do not want to generate any C wrapper
 code. In many, but not all, cases it is possible to interface to a
 foreign library directly from Allegro CL, via lisp code only. There
@@ -125,7 +121,7 @@ adequately parsed, and it becomes necessary to interface to the
 foreign code through a C wrapper as well.
 
 -D's and -I's. As with typical compilers, you can tell swig to
-`#define` certain constants, and tell it where to search for
+"#define" certain constants, and tell it where to search for
 include (.h) files.
 
 -isolate tells swig to place it's helper code in a unique
@@ -136,21 +132,17 @@ conflicts.
 
 Here is a brief discussion of the contents of MagickWand.i
 
-`
-  %module MagickWand
-`
+    %module MagickWand
 
 This names the Module currently being generated. In more concrete
 terms, the name chosen here determines the name of the output file,
 MagickWand.cl, and the common-lisp package into which the symbols
 defined by this interface are created.
 
-`
-  %insert("lisphead")  %{
-  #+linux (load "/usr/lib/libWand.so")
-  #+mswindows (load "CORE_RL_wand_.dll")
-  %}
-`
+    %insert("lisphead")  %{
+    #+linux (load "/usr/lib/libWand.so")
+    #+mswindows (load "CORE_RL_wand_.dll")
+    %}
 
 This form inserts code into the generated lisp wrapper. "lisphead"
 means that it  will be output after any SWIG helper functions, but
@@ -159,17 +151,15 @@ linux, this form assumes a default installation, while on windows, the
 assumption is that the path to the core ImageMagick libraries has been
 added to your PATH environment variable.
 
-`
-  #ifdef ACL_WINDOWS
-  %include "wand/MagickWand.h"
+    #ifdef ACL_WINDOWS
+    %include "wand/MagickWand.h"
   
-  %include "magick/magick-config.h"
+    %include "magick/magick-config.h"
   
-  %include "magick/magick-type.h"
-  %include "magick/MagickCore.h"
-  %include "wand/animate.h"
-  ...
-`
+    %include "magick/magick-type.h"
+    %include "magick/MagickCore.h"
+    %include "wand/animate.h"
+    ...
 
 First, SWIG interface files are parsed just as a C/C++ header
 file would be, with the exception that by default, #include
@@ -177,7 +167,7 @@ directives are not followed. You can use the same preprocessor
 syntax as you would in your foreign C/C++ code.
 
 Second, most of the %include's you see here represent the
-#include's that are found inside of wand/MagickWand.h. In
+"#include"'s that are found inside of wand/MagickWand.h. In
 particular, note that while MagickCore.h is included, this is
 not creating a wrapper for the entire MagickCore API. Rather,
 a few small types that are useful to the MagickWand API are
@@ -189,15 +179,15 @@ please email us at support@franz.com.
 Examples and Information
 ------------------------
 
-Please see the following:
-
- * [tech corner](http://franz.com/support/tech_corner/imagemagick052109.lhtml)
+Please see the cl-imagemagic
+[tech corner](http://franz.com/support/tech_corner/imagemagick052109.lhtml).
 
 Open Source
 -----------
 
 This project's homepage is http://opensource.franz.com. There is an informal 
-community support and development mailing list [opensource@franz.com](http://opensource.franz.com/mailinglist.html) for these open 
+community support and development mailing list 
+[opensource@franz.com](http://opensource.franz.com/mailinglist.html) for these open 
 source projects. We encourage you to take advantage by subscribing to the 
 list.  Once you're subscribed, email to opensource@franz.com with your questions, 
 comments, suggestions, and patches.
