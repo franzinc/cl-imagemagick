@@ -93,7 +93,7 @@ For more documentation please see the cl-imagemagick
 License
 -------
 
-The aserve source code is licensed under the terms of the [Lisp Lesser
+The cl-imagemagick source code is licensed under the terms of the [Lisp Lesser
 GNU Public License](http://opensource.franz.com/preamble.html), known
 as the LLGPL.  The LLGPL consists of a preamble and the LGPL. Where
 these conflict, the preamble takes precedence. cl-imagemagick is
