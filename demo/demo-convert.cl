@@ -64,3 +64,13 @@
       (unless (and content-type (match-re "^image/" content-type ))
 	(warn "Cannot verify resource is an image, assuming that it is and proceeding...")))
     (convert-blob-image resp new-format)))
+
+;; writing converted image blob out to a stream....
+#+sample-code
+(multiple-value-bind (blob len)
+    (convert-url url format-type)
+  (dotimes (i len)
+    (write-byte (ff:fslot-value-typed '(:array :unsigned-char) :c
+				      (ff:foreign-pointer-address blob)
+				      i)
+		stream)))
