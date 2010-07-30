@@ -5,6 +5,8 @@
 #+mswindows (load "CORE_RL_wand_.dll")
 %}
 
+typedef unsigned int size_t;
+
 #ifdef ACL_WINDOWS
 %include "wand/MagickWand.h"
 
@@ -32,8 +34,6 @@
 %include "wand/stream.h"
 
 #else
-
-typedef unsigned int size_t;
 
 %include "magick/ImageMagick.h"
 %include "wand/magick-wand.h"
