@@ -1,4 +1,4 @@
-cl-imagemagic: A Common Lisp layer for ImageMagick
+cl-imagemagick: A Common Lisp layer for ImageMagick
 ==================================================
 
 Table of contents
@@ -40,7 +40,7 @@ wrappers to the MagickWand API.
 Platforms
 ---------
 
-It is known to work with Allegro Common Lisp 8.1 and ImageMagick
+It is known to work with Allegro Common Lisp 8.2 and ImageMagick
 6.5.2-Q16 on Windows and 6.2.2 on Linux.
 
 Dependencies
