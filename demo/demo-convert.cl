@@ -32,5 +32,35 @@
        else (error "No images found in input file ~s." in-file))
     images-modified))
 
-    
-    
+;; returns a blob of the converted url image
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (require :aserve))
+
+;; return a blob of the in-blob converted to new-format
+(defun convert-blob-image (in-blob new-format)
+  (let ((wand (NewMagickWand))
+	(out-blob-len (ff:allocate-fobject :unsigned-int))
+	images-modified)
+    (when (= (MagickReadImageBlob wand in-blob (length in-blob))
+	     MagickFalse)
+      (error "unable to read image blob."))
+
+    (MagickResetIterator wand)
+
+    (while (/= (MagickNextImage wand) MagickFalse)
+      (MagickSetImageFormat wand new-format)
+      (setf images-modified t))
+    (if images-modified
+	(values (MagickGetImageBlob wand out-blob-len)
+		(ff:fslot-value out-blob-len)))))
+
+;; http://lisis.files.wordpress.com/2008/11/liszt.jpg
+(defun convert-url (src-url new-format)
+  (multiple-value-bind (resp code hdrs url)
+      (net.aserve.client:do-http-request src-url :format :binary)
+    (unless (= code 200)
+      (error "unable to fetch resource at ~a" url))
+    (let ((content-type (cdr (assoc :content-type hdrs))))
+      (unless (and content-type (match-re "^image/" content-type ))
+	(warn "Cannot verify resource is an image, assuming that it is and proceeding...")))
+    (convert-blob-image resp new-format)))

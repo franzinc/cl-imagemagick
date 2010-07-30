@@ -32,6 +32,9 @@
 %include "wand/stream.h"
 
 #else
+
+typedef unsigned int size_t;
+
 %include "magick/ImageMagick.h"
 %include "wand/magick-wand.h"
 
