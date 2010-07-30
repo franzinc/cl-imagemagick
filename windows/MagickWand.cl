@@ -317,6 +317,8 @@
 (in-package :MagickWand)
 (swig-def-foreign-type "__SWIGACL_FwdReference"
   (* :void))
+(swig-def-foreign-type "size_t"
+  :unsigned-int)
 ;; forward referenced stub.
 (swig-def-foreign-class "_MagickWand" (ff:foreign-pointer) (:class ))
 
@@ -407,9 +409,6 @@
 
 ;; forward referenced stub.
 (swig-def-foreign-class "StorageType" (ff:foreign-pointer) (:class ))
-
-;; forward referenced stub.
-(swig-def-foreign-class "size_t" (ff:foreign-pointer) (:class ))
 
 (swig-def-foreign-type "DrawingWand"
   #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type))
@@ -1492,7 +1491,7 @@
 
 (swig-defun ("MagickWriteImageBlob" "MagickWriteImageBlob")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
-   (:p+ PARM1_arg2  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM1_arg2  (* #.(swig-insert-id "size_t" () :type :type)) ))
   (:returning ((* :unsigned-char) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -4240,7 +4239,7 @@
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :char) )
    (:p+ PARM2_arg3  (* :void) )
-   (:p+ PARM3_arg4  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM3_arg4  #.(swig-insert-id "size_t" () :type :type) ))
   (:returning (#.(swig-insert-id "MagickBooleanType" () :type :type) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -4409,7 +4408,7 @@
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :char) )
    (:p+ PARM2_arg3  (* :void) )
-   (:p+ PARM3_arg4  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM3_arg4  #.(swig-insert-id "size_t" () :type :type) ))
   (:returning (#.(swig-insert-id "MagickBooleanType" () :type :type) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -4738,7 +4737,7 @@
 (swig-defun ("MagickGetImageProfile" "MagickGetImageProfile")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :char) )
-   (:p+ PARM2_arg3  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM2_arg3  (* #.(swig-insert-id "size_t" () :type :type)) ))
   (:returning ((* :unsigned-char) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -4759,7 +4758,7 @@
 (swig-defun ("MagickRemoveImageProfile" "MagickRemoveImageProfile")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :char) )
-   (:p+ PARM2_arg3  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM2_arg3  (* #.(swig-insert-id "size_t" () :type :type)) ))
   (:returning ((* :unsigned-char) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -6966,7 +6965,7 @@
 (swig-defun ("MagickPingImageBlob" "MagickPingImageBlob")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :void) )
-   (:p+ PARM2_arg3  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM2_arg3  #.(swig-insert-id "size_t" () :type :type) ))
   (:returning (#.(swig-insert-id "MagickBooleanType" () :type :type) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -7197,7 +7196,7 @@
 (swig-defun ("MagickReadImageBlob" "MagickReadImageBlob")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
    (:p+ PARM1_arg2  (* :void) )
-   (:p+ PARM2_arg3  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM2_arg3  #.(swig-insert-id "size_t" () :type :type) ))
   (:returning (#.(swig-insert-id "MagickBooleanType" () :type :type) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -9228,7 +9227,7 @@
 
 (swig-defun ("MagickGetImageBlob" "MagickGetImageBlob")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
-   (:p+ PARM1_arg2  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM1_arg2  (* #.(swig-insert-id "size_t" () :type :type)) ))
   (:returning ((* :unsigned-char) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
@@ -9247,7 +9246,7 @@
 
 (swig-defun ("MagickGetImagesBlob" "MagickGetImagesBlob")
   ((:p+ PARM0_arg1  (* #.(swig-insert-id "MagickWand" () :type :type)) )
-   (:p+ PARM1_arg2  (* #.(swig-insert-id "__SWIGACL_FwdReference" () :type :type)) ))
+   (:p+ PARM1_arg2  (* #.(swig-insert-id "size_t" () :type :type)) ))
   (:returning ((* :unsigned-char) )
    :strings-convert t)
   (cl::let ((ACL_ffresult swig.MagickWand:*void*)
