@@ -35,13 +35,13 @@ ImageMagick is a suite of tools allowing you to create, edit, and
 compose bitmap images. It provides powerful command-line tools to this
 effect, but also provides a number of APIs to make the same features
 available programmatically. Using SWIG, we have generated the foreign
-wrappers to the MagickWand API. 
+wrappers to the both the MagickCore and MagickWand APIs.
 
 Platforms
 ---------
 
 It is known to work with Allegro Common Lisp 8.2 and ImageMagick
-6.5.2-Q16 on Windows and 6.2.2 on Linux.
+6.5.2-Q16 on Windows and 6.6.3-2 on Linux.
 
 Dependencies
 ------------
@@ -102,12 +102,13 @@ referenced in the preamble as the LIBRARY.
 Notes
 -----
 
-The file MagickWand.cl found in the architecture specific
-subdirectories of windows/ and linux86/ were generated using the
-Makefile found in this distribution by running an up-to-date SWIG on
-MagickWand.i. If you wish to generate this interface on additional
+The files MagickCore.cl and MagickWand.cl found in the architecture
+specific subdirectories of windows/ and linux86/ were generated using
+the Makefile found in this distribution by running an up-to-date SWIG
+on MagickWand.i. If you wish to generate this interface on additional
 platforms, you can use this interface and the accompanying Makefile as
-a reference. 
+a reference. MagickWand.cl contains a superset of the wrappers
+contained in MagickCore.cl, so it is not necessary to load both files.
 
 The swig command-line used to generate this interface:
 
