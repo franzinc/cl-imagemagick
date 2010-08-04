@@ -7,8 +7,9 @@ ifeq ($(on_windows),yes)
 SWIG_FLAGS := -DACL_WINDOWS
 SWIG_INCLUDES := -I"C:/mikel/src/ImageMagick-6.5.2-Q16/include"
 else
-SWIG_FLAGS := -DACL_LINUX
-SWIG_INCLUDES := -I/usr/include
+SWIG_FLAGS := -DACL_LINUX -DWandExport
+SWIG_INCLUDES := -I/net/gemini/home/mikel/src/ImageMagick-6.6.3-2
+# SWIG_INCLUDES := -I/usr/include
 endif
 
 all: MagickWand.cl MagickCore.cl
