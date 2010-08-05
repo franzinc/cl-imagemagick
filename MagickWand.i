@@ -9,34 +9,6 @@
 
 %include "MagickCore.i"
 
-# typedef void *MagickWand, *DrawingWand, *PixelWand, *PixelIterator;
-
-
-
-#ifdef ACL_WINDOWS
-%include "wand/MagickWand.h"
-
-%include "wand/animate.h"
-%include "wand/compare.h"
-%include "wand/composite.h"
-%include "wand/conjure.h"
-%include "wand/convert.h"
-%include "wand/deprecate.h"
-%include "wand/display.h"
-%include "wand/drawing-wand.h"
-%include "wand/identify.h"
-%include "wand/import.h"
-%include "wand/magick-property.h"
-%include "wand/magick-image.h"
-%include "wand/mogrify.h"
-%include "wand/montage.h"
-%include "wand/pixel-iterator.h"
-%include "wand/pixel-view.h"
-%include "wand/pixel-wand.h"
-%include "wand/stream.h"
-
-#else
-
 %include "wand/MagickWand.h"
 
 %include "magick/MagickCore.h"
@@ -56,10 +28,8 @@
 // after pixel-wand.h
 %include "wand/pixel-iterator.h"
 
-
 // after pixel-wand.h
 %include "wand/drawing-wand.h"
-
 
 // after drawing-wand.h
 %include "wand/magick-image.h"
@@ -68,4 +38,3 @@
 %include "wand/stream.h"
 %include "wand/wand-view.h"
 
-#endif
