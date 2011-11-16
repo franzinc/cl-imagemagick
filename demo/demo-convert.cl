@@ -12,25 +12,28 @@
 (defun convert-image (in-file new-format &optional out-file)
   (let ((wand (NewMagickWand))
 	images-modified)
-    (when (= (MagickReadImage wand in-file)
-	     MagickFalse)
-      (error "unable to read image file ~s." in-file))
+    (unwind-protect
+	(progn
+	  (when (= (MagickReadImage wand in-file)
+		   MagickFalse)
+	    (error "unable to read image file ~s." in-file))
 
-    (MagickResetIterator wand)
+	  (MagickResetIterator wand)
 
-    (while (/= (MagickNextImage wand) MagickFalse)
-      (MagickSetImageFormat wand new-format)
-      (setf images-modified t))
-    (if* images-modified
-       then (unless out-file
-	      (setf out-file (namestring
-			      (merge-pathnames (make-pathname :type new-format)
-					       in-file))))
-	    (when (= (MagickWriteImages wand out-file MagickTrue)
-		     MagickFalse)
-	      (error "unable to write to file ~s." out-file))
-       else (error "No images found in input file ~s." in-file))
-    images-modified))
+	  (while (/= (MagickNextImage wand) MagickFalse)
+	    (MagickSetImageFormat wand new-format)
+	    (setf images-modified t))
+	  (if* images-modified
+	     then (unless out-file
+		    (setf out-file (namestring
+				    (merge-pathnames (make-pathname :type new-format)
+						     in-file))))
+		  (when (= (MagickWriteImages wand out-file MagickTrue)
+			   MagickFalse)
+		    (error "unable to write to file ~s." out-file))
+	     else (error "No images found in input file ~s." in-file))
+	  images-modified)
+      (DestroyMagickWand wand))))
 
 ;; returns a blob of the converted url image
 (eval-when (:compile-toplevel :load-toplevel :execute)

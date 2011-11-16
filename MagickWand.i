@@ -28,7 +28,8 @@
 // after pixel-wand.h
 %include "wand/pixel-iterator.h"
 
-// after pixel-wand.h
+%include "magick/api.h"
+# %include "magick/convert.h"
 %include "wand/drawing-wand.h"
 
 // after drawing-wand.h
